@@ -1,0 +1,1064 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(10px, 3vw, 20px);
+}
+
+.container {
+    background: white;
+    border-radius: clamp(10px, 2vw, 15px);
+    padding: clamp(20px, 4vw, 30px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: min(95vw, 500px);
+    width: 100%;
+}
+
+.game-container {
+    max-width: min(95vw, 700px);
+}
+
+h1 {
+    color: #333;
+    margin-bottom: clamp(15px, 3vw, 20px);
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+}
+
+.game-info {
+    margin-bottom: 20px;
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+.status {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: #667eea;
+    font-weight: bold;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(3px, 1vw, 5px);
+    margin: clamp(15px, 3vw, 20px) 0;
+    background: #ddd;
+    padding: clamp(3px, 1vw, 5px);
+    border-radius: clamp(5px, 2vw, 10px);
+    max-width: min(90vw, 400px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cell {
+    aspect-ratio: 1;
+    background: white;
+    border: none;
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    border-radius: clamp(3px, 1vw, 5px);
+    min-height: clamp(60px, 12vw, 100px);
+}
+
+.cell:hover {
+    background: #f0f0f0;
+    transform: scale(0.95);
+}
+
+.cell.disabled {
+    cursor: not-allowed;
+}
+
+.cell.x {
+    color: #e74c3c;
+}
+
+.cell.o {
+    color: #3498db;
+}
+
+.reset-btn, .clear-score-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 24px);
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    border-radius: clamp(20px, 4vw, 25px);
+    cursor: pointer;
+    margin: clamp(3px, 1vw, 5px);
+    transition: background 0.3s ease;
+}
+
+.reset-btn:hover, .clear-score-btn:hover {
+    background: #5a67d8;
+}
+
+.winning-line {
+    background: #2ecc71 !important;
+    color: white !important;
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) and (min-width: 481px) {
+    .game-selection {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .sudoku-board {
+        max-width: min(85vw, 400px);
+    }
+    
+    .number-pad {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: min(80vw, 320px);
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+    
+    .container {
+        margin: 0;
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    .game-selection {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .game-btn {
+        min-height: 100px;
+        padding: 15px;
+    }
+    
+    .sudoku-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .sudoku-info {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+    
+    .sudoku-board {
+        max-width: min(95vw, 280px);
+    }
+    
+    .number-pad {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: min(90vw, 250px);
+    }
+    
+    .erase-btn {
+        grid-column: span 3;
+    }
+    
+    .game-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .back-btn {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 600px;
+    }
+    
+    .game-container {
+        max-width: 800px;
+    }
+    
+    .sudoku-board {
+        max-width: 500px;
+    }
+    
+    .number-pad {
+        max-width: 400px;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    body {
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .game-board {
+        margin: 10px 0;
+        max-width: 250px;
+    }
+    
+    .sudoku-board {
+        max-width: 300px;
+        margin: 10px auto;
+    }
+    
+    .number-pad {
+        margin: 10px auto;
+        max-width: 300px;
+    }
+}
+/* Main Men
+u Styles */
+.subtitle {
+    color: #666;
+    margin-bottom: clamp(20px, 4vw, 30px);
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+}
+
+.game-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: clamp(15px, 3vw, 20px);
+    margin-top: clamp(15px, 3vw, 20px);
+}
+
+.game-btn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border: none;
+    border-radius: clamp(10px, 2vw, 15px);
+    padding: clamp(20px, 4vw, 30px) clamp(15px, 3vw, 20px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    text-align: center;
+    min-height: clamp(120px, 20vw, 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.game-icon {
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: clamp(8px, 2vw, 10px);
+}
+
+.game-btn h3 {
+    margin-bottom: clamp(3px, 1vw, 5px);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+.game-btn p {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    opacity: 0.9;
+}
+
+/* Game Header */
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    position: absolute;
+    left: 0;
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: clamp(6px, 1.5vw, 8px) clamp(12px, 3vw, 15px);
+    border-radius: clamp(15px, 3vw, 20px);
+    cursor: pointer;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #5a6268;
+}
+
+/* Sudoku Styles */
+.sudoku-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: clamp(15px, 3vw, 20px);
+    flex-wrap: wrap;
+    gap: clamp(8px, 2vw, 10px);
+}
+
+.difficulty select {
+    padding: clamp(4px, 1vw, 5px) clamp(8px, 2vw, 10px);
+    border-radius: clamp(3px, 1vw, 5px);
+    border: 1px solid #ddd;
+    margin-left: clamp(8px, 2vw, 10px);
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+}
+
+.sudoku-info {
+    display: flex;
+    gap: clamp(15px, 3vw, 20px);
+    font-weight: bold;
+    color: #555;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+}
+
+.sudoku-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 1px;
+    background: #333;
+    padding: 2px;
+    border-radius: clamp(5px, 1.5vw, 8px);
+    margin: clamp(15px, 3vw, 20px) 0;
+    max-width: min(90vw, 450px);
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.sudoku-cell {
+    aspect-ratio: 1;
+    background: white;
+    border: none;
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    min-height: clamp(25px, 8vw, 45px);
+}
+
+.sudoku-cell:hover {
+    background: #f0f0f0;
+}
+
+.sudoku-cell.selected {
+    background: #e3f2fd;
+}
+
+.sudoku-cell.given {
+    background: #f5f5f5;
+    color: #333;
+    cursor: default;
+}
+
+.sudoku-cell.error {
+    background: #ffebee;
+    color: #d32f2f;
+}
+
+.sudoku-cell.completed {
+    background: #e8f5e8;
+}
+
+/* Add thicker borders for 3x3 boxes */
+.sudoku-cell:nth-child(3n) {
+    border-right: 2px solid #333;
+}
+
+.sudoku-cell:nth-child(n+19):nth-child(-n+27),
+.sudoku-cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 2px solid #333;
+}
+
+.number-pad {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(8px, 2vw, 10px);
+    margin: clamp(15px, 3vw, 20px) 0;
+    max-width: min(85vw, 350px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.number-btn {
+    aspect-ratio: 1;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: clamp(5px, 1.5vw, 8px);
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: clamp(40px, 8vw, 50px);
+}
+
+.number-btn:hover {
+    background: #5a67d8;
+    transform: scale(0.95);
+}
+
+.erase-btn {
+    background: #e74c3c;
+    grid-column: span 2;
+}
+
+.erase-btn:hover {
+    background: #c0392b;
+}
+
+/* 2048 Game Styles */
+.score-info {
+    display: flex;
+    justify-content: center;
+    gap: clamp(15px, 3vw, 20px);
+    margin-bottom: clamp(15px, 3vw, 20px);
+}
+
+.score-box {
+    background: #bbada0;
+    padding: clamp(8px, 2vw, 10px) clamp(15px, 3vw, 20px);
+    border-radius: clamp(5px, 1vw, 8px);
+    text-align: center;
+    min-width: clamp(60px, 12vw, 80px);
+}
+
+.score-label {
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    color: #eee4da;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.score-value {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: white;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+.game2048-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(8px, 2vw, 10px);
+    background: #bbada0;
+    padding: clamp(8px, 2vw, 10px);
+    border-radius: clamp(5px, 2vw, 8px);
+    max-width: min(90vw, 400px);
+    margin: clamp(15px, 3vw, 20px) auto;
+    position: relative;
+}
+
+.tile {
+    aspect-ratio: 1;
+    background: #cdc1b4;
+    border-radius: clamp(3px, 1vw, 5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    font-weight: bold;
+    transition: all 0.15s ease-in-out;
+    min-height: clamp(60px, 12vw, 80px);
+}
+
+.tile-2 { background: #eee4da; color: #776e65; }
+.tile-4 { background: #ede0c8; color: #776e65; }
+.tile-8 { background: #f2b179; color: #f9f6f2; }
+.tile-16 { background: #f59563; color: #f9f6f2; }
+.tile-32 { background: #f67c5f; color: #f9f6f2; }
+.tile-64 { background: #f65e3b; color: #f9f6f2; }
+.tile-128 { background: #edcf72; color: #f9f6f2; font-size: clamp(1rem, 3.5vw, 1.4rem); }
+.tile-256 { background: #edcc61; color: #f9f6f2; font-size: clamp(1rem, 3.5vw, 1.4rem); }
+.tile-512 { background: #edc850; color: #f9f6f2; font-size: clamp(1rem, 3.5vw, 1.4rem); }
+.tile-1024 { background: #edc53f; color: #f9f6f2; font-size: clamp(0.8rem, 3vw, 1.2rem); }
+.tile-2048 { background: #edc22e; color: #f9f6f2; font-size: clamp(0.8rem, 3vw, 1.2rem); }
+
+.mobile-controls {
+    display: grid;
+    gap: clamp(8px, 2vw, 10px);
+    margin-top: clamp(15px, 3vw, 20px);
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    gap: clamp(8px, 2vw, 10px);
+}
+
+.control-btn {
+    background: #8f7a66;
+    color: white;
+    border: none;
+    border-radius: clamp(5px, 1vw, 8px);
+    padding: clamp(10px, 2vw, 12px);
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    min-width: clamp(40px, 8vw, 50px);
+    min-height: clamp(40px, 8vw, 50px);
+}
+
+.control-btn:hover {
+    background: #9f8a76;
+}
+
+/* Snake Game Styles */
+.snake-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: clamp(10px, 2vw, 15px);
+    font-weight: bold;
+    color: #555;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    flex-wrap: wrap;
+    gap: clamp(10px, 2vw, 15px);
+}
+
+.snake-canvas {
+    border: 3px solid #333;
+    border-radius: clamp(5px, 1vw, 8px);
+    background: #f0f0f0;
+    max-width: min(90vw, 400px);
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    margin: clamp(10px, 2vw, 15px) auto;
+    display: block;
+}
+
+.game-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(10px, 2vw, 15px);
+}
+
+/* Responsive adjustments for new games */
+@media (max-width: 480px) {
+    .score-info {
+        gap: 10px;
+    }
+    
+    .score-box {
+        padding: 6px 12px;
+        min-width: 50px;
+    }
+    
+    .game2048-board {
+        max-width: min(95vw, 280px);
+        gap: 6px;
+        padding: 6px;
+    }
+    
+    .tile {
+        font-size: 1rem;
+        min-height: 50px;
+    }
+    
+    .snake-info {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+    
+    .snake-canvas {
+        max-width: min(95vw, 280px);
+    }
+    
+    .mobile-controls {
+        max-width: 150px;
+    }
+    
+    .control-btn {
+        min-width: 35px;
+        min-height: 35px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-controls {
+        display: grid;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-controls {
+        display: none;
+    }
+}
+
+/* Game over overlay */
+.game-over-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: clamp(5px, 2vw, 8px);
+    z-index: 10;
+}
+
+.game-over-text {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: bold;
+    color: #776e65;
+    margin-bottom: clamp(10px, 2vw, 15px);
+}
+
+.try-again-btn {
+    background: #8f7a66;
+    color: white;
+    border: none;
+    padding: clamp(8px, 2vw, 10px) clamp(15px, 3vw, 20px);
+    border-radius: clamp(5px, 1vw, 8px);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.try-again-btn:hover {
+    background: #9f8a76;
+}/* Tetr
+is Game Styles */
+.tetris-info {
+    margin-bottom: clamp(15px, 3vw, 20px);
+}
+
+.tetris-stats {
+    display: flex;
+    justify-content: center;
+    gap: clamp(10px, 2vw, 15px);
+    margin-bottom: clamp(10px, 2vw, 15px);
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    background: #333;
+    color: white;
+    padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 15px);
+    border-radius: clamp(5px, 1vw, 8px);
+    text-align: center;
+    min-width: clamp(50px, 10vw, 70px);
+}
+
+.stat-label {
+    font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+    opacity: 0.8;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+.tetris-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(15px, 3vw, 20px);
+    margin: clamp(15px, 3vw, 20px) 0;
+}
+
+.tetris-next {
+    text-align: center;
+}
+
+.tetris-next h4 {
+    margin-bottom: clamp(5px, 1vw, 8px);
+    color: #333;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.tetris-canvas {
+    border: 3px solid #333;
+    border-radius: clamp(5px, 1vw, 8px);
+    background: #000;
+    max-width: min(70vw, 300px);
+    height: auto;
+    aspect-ratio: 1/2;
+}
+
+#next-canvas {
+    border: 2px solid #333;
+    border-radius: clamp(3px, 1vw, 5px);
+    background: #000;
+    width: clamp(60px, 12vw, 80px);
+    height: clamp(60px, 12vw, 80px);
+}
+
+/* Tetris colors for different pieces */
+.tetris-i { background: #00f0f0; } /* Cyan */
+.tetris-o { background: #f0f000; } /* Yellow */
+.tetris-t { background: #a000f0; } /* Purple */
+.tetris-s { background: #00f000; } /* Green */
+.tetris-z { background: #f00000; } /* Red */
+.tetris-j { background: #0000f0; } /* Blue */
+.tetris-l { background: #f0a000; } /* Orange */
+
+/* Mobile responsive adjustments for Tetris */
+@media (max-width: 480px) {
+    .tetris-stats {
+        gap: 8px;
+    }
+    
+    .stat-box {
+        padding: 5px 10px;
+        min-width: 45px;
+    }
+    
+    .tetris-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .tetris-next {
+        order: -1;
+    }
+    
+    .tetris-canvas {
+        max-width: min(85vw, 250px);
+    }
+    
+    #next-canvas {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
+    .tetris-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .tetris-canvas {
+        max-width: min(60vw, 280px);
+    }
+}
+
+/* Landscape mobile adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .tetris-container {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .tetris-canvas {
+        max-width: min(40vw, 200px);
+        max-height: 70vh;
+    }
+    
+    .tetris-stats {
+        gap: 5px;
+    }
+    
+    .stat-box {
+        padding: 4px 8px;
+    }
+}/* Ch
+eckers Game Styles */
+.checkers-info {
+    margin-bottom: clamp(15px, 3vw, 20px);
+}
+
+.player-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: clamp(10px, 2vw, 15px);
+    gap: clamp(10px, 2vw, 15px);
+}
+
+.player-box {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 2vw, 10px);
+    padding: clamp(8px, 2vw, 10px);
+    border-radius: clamp(5px, 1vw, 8px);
+    background: #f5f5f5;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.player-box.active {
+    background: #e3f2fd;
+    border: 2px solid #2196f3;
+}
+
+.player-color {
+    width: clamp(25px, 5vw, 30px);
+    height: clamp(25px, 5vw, 30px);
+    border-radius: 50%;
+    border: 2px solid #333;
+    position: relative;
+}
+
+.red-piece {
+    background: linear-gradient(145deg, #f44336, #d32f2f);
+}
+
+.black-piece {
+    background: linear-gradient(145deg, #424242, #212121);
+}
+
+.player-details {
+    flex: 1;
+}
+
+.player-name {
+    font-weight: bold;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    color: #333;
+}
+
+.piece-count {
+    font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+    color: #666;
+}
+
+.checkers-board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0;
+    background: #8B4513;
+    border: 3px solid #654321;
+    border-radius: clamp(5px, 1vw, 8px);
+    max-width: min(90vw, 480px);
+    margin: clamp(15px, 3vw, 20px) auto;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.checker-square {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.checker-square.light {
+    background: #f5deb3;
+}
+
+.checker-square.dark {
+    background: #8B4513;
+}
+
+.checker-square.playable {
+    background: #654321;
+}
+
+.checker-square.highlighted {
+    background: #ffeb3b !important;
+    box-shadow: inset 0 0 0 3px #ff9800;
+}
+
+.checker-square.possible-move {
+    background: #4caf50 !important;
+    box-shadow: inset 0 0 0 2px #2e7d32;
+}
+
+.checker-square.selected {
+    background: #2196f3 !important;
+    box-shadow: inset 0 0 0 3px #1976d2;
+}
+
+.checker-piece {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    border: 2px solid #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checker-piece.red {
+    background: linear-gradient(145deg, #f44336, #d32f2f);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.checker-piece.black {
+    background: linear-gradient(145deg, #424242, #212121);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.checker-piece.king::after {
+    content: '♔';
+    color: gold;
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.checker-piece:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.checker-piece.selected {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 3px #2196f3, 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.difficulty-selector {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 2vw, 10px);
+    margin-top: clamp(10px, 2vw, 15px);
+}
+
+.difficulty-selector label {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    color: #555;
+    font-weight: bold;
+}
+
+.difficulty-selector select {
+    padding: clamp(4px, 1vw, 6px) clamp(8px, 2vw, 10px);
+    border-radius: clamp(3px, 1vw, 5px);
+    border: 1px solid #ddd;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    background: white;
+}
+
+/* Checkers responsive adjustments */
+@media (max-width: 480px) {
+    .player-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .player-box {
+        padding: 6px 8px;
+    }
+    
+    .checkers-board {
+        max-width: min(95vw, 320px);
+    }
+    
+    .checker-piece {
+        width: 75%;
+        height: 75%;
+    }
+    
+    .difficulty-selector {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
+    .checkers-board {
+        max-width: min(85vw, 400px);
+    }
+}
+
+/* Animation for piece movement */
+@keyframes piece-move {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.checker-piece.moving {
+    animation: piece-move 0.3s ease-in-out;
+}
+
+/* Game over overlay for checkers */
+.checkers-game-over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: clamp(5px, 1vw, 8px);
+    z-index: 10;
+}
+
+.checkers-game-over-text {
+    color: white;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: bold;
+    margin-bottom: clamp(15px, 3vw, 20px);
+    text-align: center;
+}
+
+.checkers-new-game-btn {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 24px);
+    border-radius: clamp(5px, 1vw, 8px);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.checkers-new-game-btn:hover {
+    background: #45a049;
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Collection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Main Menu -->
+    <div class="container" id="main-menu">
+        <h1>Game Collection</h1>
+        <p class="subtitle">Choose your game</p>
+        <div class="game-selection">
+            <button class="game-btn" id="tictactoe-btn">
+                <div class="game-icon">⭕</div>
+                <h3>Tic Tac Toe</h3>
+                <p>Classic 3x3 grid game</p>
+            </button>
+            <button class="game-btn" id="sudoku-btn">
+                <div class="game-icon">🔢</div>
+                <h3>Sudoku</h3>
+                <p>Number puzzle challenge</p>
+            </button>
+            <button class="game-btn" id="game2048-btn">
+                <div class="game-icon">🎯</div>
+                <h3>2048</h3>
+                <p>Slide to combine numbers</p>
+            </button>
+            <button class="game-btn" id="snake-btn">
+                <div class="game-icon">🐍</div>
+                <h3>Snake</h3>
+                <p>Eat food, grow longer</p>
+            </button>
+            <button class="game-btn" id="tetris-btn">
+                <div class="game-icon">🧩</div>
+                <h3>Tetris</h3>
+                <p>Stack falling blocks</p>
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Tic Tac Toe Game -->
+    <div class="container game-container" id="tictactoe-game" style="display: none;">
+        <div class="game-header">
+            <button class="back-btn" id="back-from-ttt">← Back</button>
+            <h1>Tic Tac Toe</h1>
+        </div>
+        <div class="game-info">
+            <div class="score">
+                <span>You: <span id="player-score">0</span></span>
+                <span>Computer: <span id="computer-score">0</span></span>
+            </div>
+            <div class="status" id="game-status">Your turn (X)</div>
+        </div>
+        <div class="game-board" id="game-board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <button class="reset-btn" id="reset-btn">New Game</button>
+        <button class="clear-score-btn" id="clear-score-btn">Clear Score</button>
+    </div>
+
+    <!-- Sudoku Game -->
+    <div class="container game-container" id="sudoku-game" style="display: none;">
+        <div class="game-header">
+            <button class="back-btn" id="back-from-sudoku">← Back</button>
+            <h1>Sudoku</h1>
+        </div>
+        <div class="sudoku-controls">
+            <div class="difficulty">
+                <label>Difficulty:</label>
+                <select id="difficulty-select">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="sudoku-info">
+                <span>Time: <span id="timer">00:00</span></span>
+                <span>Mistakes: <span id="mistakes">0</span>/3</span>
+            </div>
+        </div>
+        <div class="sudoku-board" id="sudoku-board"></div>
+        <div class="number-pad">
+            <button class="number-btn" data-number="1">1</button>
+            <button class="number-btn" data-number="2">2</button>
+            <button class="number-btn" data-number="3">3</button>
+            <button class="number-btn" data-number="4">4</button>
+            <button class="number-btn" data-number="5">5</button>
+            <button class="number-btn" data-number="6">6</button>
+            <button class="number-btn" data-number="7">7</button>
+            <button class="number-btn" data-number="8">8</button>
+            <button class="number-btn" data-number="9">9</button>
+            <button class="number-btn erase-btn" data-number="0">Erase</button>
+        </div>
+        <button class="reset-btn" id="new-sudoku-btn">New Puzzle</button>
+    </div>
+
+    <!-- 2048 Game -->
+    <div class="container game-container" id="game2048" style="display: none;">
+        <div class="game-header">
+            <button class="back-btn" id="back-from-2048">← Back</button>
+            <h1>2048</h1>
+        </div>
+        <div class="game-info">
+            <div class="score-info">
+                <div class="score-box">
+                    <div class="score-label">Score</div>
+                    <div class="score-value" id="current-score">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Best</div>
+                    <div class="score-value" id="best-score">0</div>
+                </div>
+            </div>
+            <div class="game-status" id="game2048-status">Use arrow keys or swipe to move tiles</div>
+        </div>
+        <div class="game2048-board" id="game2048-board"></div>
+        <div class="game-controls">
+            <button class="reset-btn" id="new-2048-btn">New Game</button>
+            <div class="mobile-controls">
+                <div class="control-row">
+                    <button class="control-btn" id="up-btn">↑</button>
+                </div>
+                <div class="control-row">
+                    <button class="control-btn" id="left-btn">←</button>
+                    <button class="control-btn" id="down-btn">↓</button>
+                    <button class="control-btn" id="right-btn">→</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Snake Game -->
+    <div class="container game-container" id="snake-game" style="display: none;">
+        <div class="game-header">
+            <button class="back-btn" id="back-from-snake">← Back</button>
+            <h1>Snake</h1>
+        </div>
+        <div class="game-info">
+            <div class="snake-info">
+                <span>Score: <span id="snake-score">0</span></span>
+                <span>High Score: <span id="snake-high-score">0</span></span>
+                <span>Speed: <span id="snake-speed">1</span></span>
+            </div>
+            <div class="game-status" id="snake-status">Press Space or tap Start to begin</div>
+        </div>
+        <canvas class="snake-canvas" id="snake-canvas" width="400" height="400"></canvas>
+        <div class="game-controls">
+            <button class="reset-btn" id="start-snake-btn">Start Game</button>
+            <button class="reset-btn" id="pause-snake-btn" style="display: none;">Pause</button>
+            <div class="mobile-controls">
+                <div class="control-row">
+                    <button class="control-btn" id="snake-up-btn">↑</button>
+                </div>
+                <div class="control-row">
+                    <button class="control-btn" id="snake-left-btn">←</button>
+                    <button class="control-btn" id="snake-down-btn">↓</button>
+                    <button class="control-btn" id="snake-right-btn">→</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tetris Game -->
+    <div class="container game-container" id="tetris-game" style="display: none;">
+        <div class="game-header">
+            <button class="back-btn" id="back-from-tetris">← Back</button>
+            <h1>Tetris</h1>
+        </div>
+        <div class="tetris-info">
+            <div class="tetris-stats">
+                <div class="stat-box">
+                    <div class="stat-label">Score</div>
+                    <div class="stat-value" id="tetris-score">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Lines</div>
+                    <div class="stat-value" id="tetris-lines">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Level</div>
+                    <div class="stat-value" id="tetris-level">1</div>
+                </div>
+            </div>
+            <div class="game-status" id="tetris-status">Press Space or tap Start to begin</div>
+        </div>
+        <div class="tetris-container">
+            <div class="tetris-next">
+                <h4>Next</h4>
+                <canvas id="next-canvas" width="80" height="80"></canvas>
+            </div>
+            <canvas class="tetris-canvas" id="tetris-canvas" width="300" height="600"></canvas>
+        </div>
+        <div class="game-controls">
+            <button class="reset-btn" id="start-tetris-btn">Start Game</button>
+            <button class="reset-btn" id="pause-tetris-btn" style="display: none;">Pause</button>
+            <div class="mobile-controls">
+                <div class="control-row">
+                    <button class="control-btn" id="tetris-rotate-btn">↻</button>
+                    <button class="control-btn" id="tetris-up-btn">↑</button>
+                </div>
+                <div class="control-row">
+                    <button class="control-btn" id="tetris-left-btn">←</button>
+                    <button class="control-btn" id="tetris-down-btn">↓</button>
+                    <button class="control-btn" id="tetris-right-btn">→</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
